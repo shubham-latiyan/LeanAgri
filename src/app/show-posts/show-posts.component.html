@@ -1,0 +1,71 @@
+<div class="container">
+    <a (click)="isCreate = !isCreate" class="waves-effect waves-light btn"
+        style="margin-top:40px ">{{!isCreate ? "Create New Post" : "Close"}}</a>
+
+    <div *ngIf="isCreate" class="row" style="margin-top: 25px">
+        <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="col s12">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Title" id="first_name" type="text" formControlName="title" class="validate">
+                    <label for="first_name">Title</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="last_name" type="number" formControlName="userId" class="validate">
+                    <label for="last_name">User Id</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="body" type="text" formControlName="body" class="validate">
+                    <label for="body">Body</label>
+                </div>
+            </div>
+            <button class="waves-effect waves-light btn" type="submit" [disabled]="!postForm.valid">Submit</button>
+        </form>
+    </div>
+
+    <h4>All posts ({{totalPosts}})</h4>
+    <div *ngFor="let item of posts; let i=index">
+        <div class="divider"></div>
+        <div class="section">
+            <h5 *ngIf="currentIndex != i">{{ item?.id }}. <a routerLink="posts/{{item?.id}}"
+                    routerLinkActive="active">{{ item?.title }}</a> &nbsp;
+                <!-- <img (click)="editPost(i, item)" src="../../assets/images/edit.png" height="25" width="25"> -->
+                <a (click)="editPost(i, item)" class="btn-floating btn-small waves-effect waves-light" style="margin-left: 10px">edit</a>
+            </h5>
+            <div *ngIf="currentIndex == i" class="input-field col s6">
+                Post Title<input name="text" [(ngModel)]="obj.title" id="title" type="text" class="validate">
+            </div>
+            <p *ngIf="currentIndex != i">{{item?.body}}</p>
+            <div *ngIf="currentIndex == i" class="input-field col s12">
+                Post Body<input name="body" [(ngModel)]="obj.body" id="body" type="text" class="validate">
+            </div>
+            <span *ngIf="currentIndex != i">Posted by User Id {{ item?.userId }}</span>
+            <div *ngIf="currentIndex == i" class="input-field col s6">
+                UserId <input name="userId" [(ngModel)]="obj.userId" id="userId" type="number" class="validate">
+            </div>
+            <a *ngIf="currentIndex == i" (click)="updatePost(item?.id)" class="waves-effect waves-light btn">Update</a>
+            <a *ngIf="currentIndex == i" (click)="currentIndex = 896985" class="waves-effect waves-light btn" style="margin-left: 10px">Cancel</a>
+        </div>
+        <div class="divider"></div>
+    </div>
+</div>
+<!-- loader -->
+<div class="custom-overlay sidebar-overlay active" *ngIf="loading"></div>
+<div *ngIf="loading" class="spinner">
+    <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+        y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+        <circle fill="#4c5d62" stroke="none" cx="6" cy="50" r="6">
+            <animateTransform attributeName="transform" dur="1s" type="translate" values="0 15 ; 0 -15; 0 15"
+                repeatCount="indefinite" begin="0.1" />
+        </circle>
+        <circle fill="#4c5d62" stroke="none" cx="30" cy="50" r="6">
+            <animateTransform attributeName="transform" dur="1s" type="translate" values="0 10 ; 0 -10; 0 10"
+                repeatCount="indefinite" begin="0.2" />
+        </circle>
+        <circle fill="#4c5d62" stroke="none" cx="54" cy="50" r="6">
+            <animateTransform attributeName="transform" dur="1s" type="translate" values="0 5 ; 0 -5; 0 5"
+                repeatCount="indefinite" begin="0.3" />
+        </circle>
+    </svg>
+</div>

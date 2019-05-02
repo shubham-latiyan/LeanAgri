@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+  .spinner {
+    width: 100px;
+    height: 100px;
+    margin: 100px auto;
+    position: absolute;
+    top: 30%;
+    left: 50%;             
+}
+.custom-overlay.active{display: block}
+.custom-overlay{
+    position: fixed; 
+    display: none;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index:9;
+    background-color: #065170;
+    opacity: 0.5;
+}
+.custom-overlay.sidebar-overlay {
+    z-index: 1100;
+}

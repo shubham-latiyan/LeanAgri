@@ -1,0 +1,45 @@
+<div class="container">
+    <h4 style="display: inline-block">Posts Details</h4>
+    <a style="display: inline-block" routerLink="" class="waves-effect btn1 waves-light btn">All Posts</a>
+    <div *ngFor="let item of post">
+        <div class="divider"></div>
+        <div class="section">
+            <h5>{{ item?.id }}. <a>{{ item?.title }}</a></h5>
+            <p>{{item?.body}}</p>
+            <span>Posted by User Id {{ item?.userId }}</span>
+        </div>
+        <div class="divider"></div>
+    </div>
+</div>
+<div class="container">
+    <h4 style="margin-top: 65px;">Comments ({{toalComments}})</h4>
+    <div *ngFor="let item of comments">
+        <div class="divider"></div>
+        <div class="section">
+            <h5>{{ item?.id }}. <a>{{ item?.name }}</a></h5>
+            <p>{{item?.body}}</p>
+            <span>Posted by UserId {{ item?.id }} </span>
+            <p>Email: {{ item?.email }}</p>
+        </div>
+        <div class="divider"></div>
+    </div>
+</div>
+<!-- loader -->
+<div class="custom-overlay sidebar-overlay active" *ngIf="loading"></div>
+<div *ngIf="loading" class="spinner">
+    <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+        y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+        <circle fill="#4c5d62" stroke="none" cx="6" cy="50" r="6">
+            <animateTransform attributeName="transform" dur="1s" type="translate" values="0 15 ; 0 -15; 0 15"
+                repeatCount="indefinite" begin="0.1" />
+        </circle>
+        <circle fill="#4c5d62" stroke="none" cx="30" cy="50" r="6">
+            <animateTransform attributeName="transform" dur="1s" type="translate" values="0 10 ; 0 -10; 0 10"
+                repeatCount="indefinite" begin="0.2" />
+        </circle>
+        <circle fill="#4c5d62" stroke="none" cx="54" cy="50" r="6">
+            <animateTransform attributeName="transform" dur="1s" type="translate" values="0 5 ; 0 -5; 0 5"
+                repeatCount="indefinite" begin="0.3" />
+        </circle>
+    </svg>
+</div>
